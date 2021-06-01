@@ -18,4 +18,8 @@ public class BlogServiceImp implements BlogService {
         return blogMapper.queryAllBlog();
     }
 
+    public List<Blog> queryIndexBlog() {
+        return blogMapper.queryIndexBlog();
+    }
+
 }

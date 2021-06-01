@@ -11,4 +11,6 @@ import java.util.List;
 public interface BlogMapper {
     //查询全部blog,返回list集合
     List<Blog> queryAllBlog();
+
+    List<Blog> queryIndexBlog();
 }

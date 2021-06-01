@@ -7,4 +7,9 @@
     <select id="queryAllBlog" resultType="Blog">
         SELECT * from s_blog
     </select>
+
+    <!--查询首页blog-->
+    <select id="queryIndexBlog" resultType="Blog">
+        SELECT * from s_blog
+    </select>
 </mapper>

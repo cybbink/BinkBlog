@@ -8,7 +8,7 @@
     <meta name="viewport" content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=no">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>异步 </title>
+    <title>BinkBlog</title>
     <link href="/binkweb/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/binkweb/assets/css/style.css" rel="stylesheet" />
     <link href="/binkweb/assets/css/nprogress.css" rel="stylesheet" />
@@ -40,40 +40,40 @@
                 <img src="/binkweb/assets/img/logo.png" class="logo"/>
             </a>
         </div>
-        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1" style="padding: 27px 0px;">
             <ul class="nav navbar-nav header-menu">
                 <li>
-                    <a href="index.html">
+                    <a href="/blog/index">
                         首页
                     </a>
                 </li>
                 <li>
-                    <a href="about.html">
+                    <a href="/blog/about">
                         关于
                     </a>
                 </li>
                 <li>
-                    <a href="blog.html">
+                    <a href="/blog/blog">
                         博客
                     </a>
                 </li>
                 <li>
-                    <a href="works.html">
+                    <a href="/blog/works">
                         作品
                     </a>
                 </li>
                 <li>
-                    <a href="links.html">
+                    <a href="/blog/links">
                         链接
                     </a>
                 </li>
                 <li>
-                    <a href="contact.html">
+                    <a href="/blog/contact">
                         联系
                     </a>
                 </li>
                 <li>
-                    <a href="help.html">
+                    <a href="/blog/help">
                         帮助
                     </a>
                 </li>
@@ -81,8 +81,8 @@
         </div>
     </div>
 </nav>
-<div class="leftbar">
-    <!-- 左菜单 -->
+<!--<div class="leftbar">
+    &lt;!&ndash; 左菜单 &ndash;&gt;
     <div class="left_menu">
         <ul class="menu_link">
             <li>
@@ -185,9 +185,9 @@
             </li>
         </ul>
     </div>
-</div>
+</div>-->
 <!--Start banner img-->
-<div class="container-filed" id="banner_container">
+<!--<div class="container-filed" id="banner_container">
     <div class="row">
         <div class="col-md-12">
             <div class="slider-wrapper theme-default">
@@ -200,7 +200,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!--End banner img-->
 <!--主要内容 -->
     <div class="container-fluid main-container" id="main-container">
@@ -371,6 +371,8 @@
     </footer>
 </div>
 <script src="/binkweb/assets/js/bootstrap.min.js"></script>
+<script src="/binkweb/assets/js/initindex.js"></script>
+
 <script>
         /*banner 初始化*/
         $(window).load(function() {
@@ -390,6 +392,21 @@
         $('.version').text(NProgress.version);
         NProgress.start();
         setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 1000);
+
+        //ajax异步初始化页面数据
+        $.ajax({
+            "url":"http://localhost:8080/list/indexList",
+            "type":"get",
+            "dataType":"json",
+            "success":function(obj) {
+                //拼接html
+                alert((obj.list)[0].title);
+
+            },
+            "error":function(obj) {
+                alert("系统异常！");
+            }
+        });
     })
     
 </script>

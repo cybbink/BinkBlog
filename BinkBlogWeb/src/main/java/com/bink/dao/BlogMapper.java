@@ -13,4 +13,5 @@ public interface BlogMapper {
     List<Blog> queryAllBlog();
 
     List<Blog> queryIndexBlog();
+
 }

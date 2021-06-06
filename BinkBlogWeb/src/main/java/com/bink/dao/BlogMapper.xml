@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bink.dao.BlogMapper">
-    <!--查询全部blog-->
-    <select id="queryAllBlog" resultType="Blog">
+<!--查询全部blog-->
+<select id="queryAllBlog" resultType="Blog">
         SELECT * from s_blog
     </select>
 
-    <!--查询首页blog-->
-    <select id="queryIndexBlog" resultType="Blog">
-        SELECT * from s_blog
+<!--查询首页blog-->
+    <select id="queryIndexBlog" resultMap="BlogInfo">
+        SELECT a.bid,a.title,a.author,a.pub_date,a.status,e.content FROM s_blog a
+            LEFT JOIN s_blog_content e ON a.bid=e.bid
+            ORDER BY a.pub_date DESC limit 0,2
+    </select>
+   <resultMap id="BlogInfo" type="com.bink.pojo.Blog">
+        <collection property="keyWord" javaType="ArrayList" ofType="java.lang.String" column="bid" select="getKeyWordByBid"></collection>
+        <collection property="topic" javaType="ArrayList" ofType="java.lang.String" column="bid" select="getTopicByBid"></collection>
+        <collection property="sort" javaType="ArrayList" ofType="java.lang.String" column="bid" select="getSortByBid"></collection>
+   </resultMap>
+    <!--翻译关键字、栏目、分类字典-->
+    <select id="getKeyWordByBid" resultType="java.lang.String">
+        select b.keyword from s_blog_keyword a left join d_keyword b on a.key_word=b.kid where a.bid=#{bid};
+    </select>
+    <select id="getTopicByBid" resultType="java.lang.String">
+        select b.topic_name from s_blog_topic a left join d_topic b on a.topic=b.topic_id where a.bid=#{bid};
+    </select>
+    <select id="getSortByBid" resultType="java.lang.String">
+        select b.sort_name from s_blog_sort a left join d_sort b on a.sort=b.sid where a.bid=#{bid};
     </select>
 </mapper>

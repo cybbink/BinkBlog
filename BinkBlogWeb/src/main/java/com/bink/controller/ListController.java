@@ -28,7 +28,7 @@ public class ListController {
     public Map indexList(Model model){
         Map map = new HashMap();
         map.put("code","200");
-        map.put("list",blogService.queryAllBlog());
+        map.put("list",blogService.queryIndexBlog());
         return map;
     }
 }

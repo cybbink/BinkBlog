@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bink.dao.BlogContentMapper">
+    <!--根据博客id查询内容信息-->
+    <select id="getContentByBid" resultType="BlogContent">
+        SELECT * from s_blog_content where bid=#{bid}
+    </select>
+</mapper>
